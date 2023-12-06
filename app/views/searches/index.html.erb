@@ -22,3 +22,12 @@
     </div>
   </div>
 <% end %>
+
+
+<h1>Search Results</h1>
+
+<% if @response %>
+  <p><%= @response["choices"].first["text"] %></p>
+<% else %>
+  <p>No results found.</p>
+<% end %>
