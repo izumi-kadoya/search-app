@@ -14,12 +14,12 @@ class SearchesController < ApplicationController
     response = HTTParty.post(
       "https://api.openai.com/v1/engines/davinci-codex/completions",
       headers: {
-        "Authorization" => "Bearer YOUR_API_KEY",
+        "Authorization" => "Bearer #{ENV['OPENAI_API_KEY']}",
         "Content-Type" => "application/json"
       },
       body: {
         prompt: keywords,
-        max_tokens: 100
+        max_tokens: 100,
         model: "gpt-4"
       }.to_json
     )
