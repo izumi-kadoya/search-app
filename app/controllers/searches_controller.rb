@@ -2,17 +2,15 @@ class SearchesController < ApplicationController
   require 'httparty'
 
   def index
+    @response = session[:response]
+    session.delete(:response)
   end
 
-
-
   def create
-    # ユーザーからのキーワードを取得
     keywords = [params[:keyword_1], params[:keyword_2], params[:keyword_3]].join(" ")
 
-    # OpenAI APIにリクエストを送信
     response = HTTParty.post(
-      "https://api.openai.com/v1/engines/davinci-codex/completions",
+      "https://api.openai.com/v1/engines/gpt-4/completions",
       headers: {
         "Authorization" => "Bearer #{ENV['OPENAI_API_KEY']}",
         "Content-Type" => "application/json"
@@ -24,11 +22,7 @@ class SearchesController < ApplicationController
       }.to_json
     )
 
-    # レスポンスをビューに渡す
-    @response = response.parsed_response
-
-    render 'show'
+    session[:response] = response.parsed_response
+    redirect_to action: :index
   end
-end
-
 end

@@ -1,4 +1,4 @@
 Rails.application.routes.draw do
- resources  :searches
- root to: 'searches#index'
+  resources :searches, only: [:index, :create]
+  root to: 'searches#index'
 end
