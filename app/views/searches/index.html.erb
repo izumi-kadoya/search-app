@@ -1,6 +1,7 @@
 <h1 class="text-center my-4">Search Forms</h1>
 
-<%= form_with url: searches_path, method: :get, local: true, html: { class: 'container' } do |form| %>
+
+<%= form_with url: searches_path, method: :post, local: true, html: { class: 'container' } do |form| %>
   <div class="row">
     <div class="col-md-6 offset-md-3">
       <div class="mb-3">
@@ -23,10 +24,7 @@
   </div>
 <% end %>
 
-
-<h1>Search Results</h1>
-
-<% if @response %>
+<% if @response && @response["choices"] && @response["choices"].first %>
   <p><%= @response["choices"].first["text"] %></p>
 <% else %>
   <p>No results found.</p>

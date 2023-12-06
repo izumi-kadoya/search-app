@@ -12,7 +12,7 @@ class SearchesController < ApplicationController
     response = HTTParty.post(
       "https://api.openai.com/v1/engines/gpt-4/completions",
       headers: {
-        "Authorization" => "Bearer #{ENV['OPENAI_API_KEY']}",
+        "Authorization" => "Bearer #{ENV['OPENAI_API_SECRET_KEY']}",
         "Content-Type" => "application/json"
       },
       body: {
@@ -21,7 +21,7 @@ class SearchesController < ApplicationController
         model: "gpt-4"
       }.to_json
     )
-
+    Rails.logger.info "API Response: #{response.parsed_response}"
     session[:response] = response.parsed_response
     redirect_to action: :index
   end
