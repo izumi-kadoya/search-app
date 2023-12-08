@@ -10,7 +10,7 @@ class SearchesController < ApplicationController
     keywords = [params[:keyword_1], params[:keyword_2], params[:keyword_3]].join(" ")
 
     response = HTTParty.post(
-      "https://api.openai.com/v1/engines/gpt-4/completions",
+      "https://api.openai.com/v1/chat/completions",
       headers: {
         "Authorization" => "Bearer #{ENV['OPENAI_API_SECRET_KEY']}",
         "Content-Type" => "application/json"
@@ -18,7 +18,7 @@ class SearchesController < ApplicationController
       body: {
         prompt: keywords,
         max_tokens: 100,
-        model: "gpt-4"
+        model: "gpt-4 turbo"
       }.to_json
     )
     Rails.logger.info "API Response: #{response.parsed_response}"
