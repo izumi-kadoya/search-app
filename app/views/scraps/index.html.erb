@@ -1,0 +1,25 @@
+<h1 class="text-center my-4">Search Forms</h1>
+
+
+<%= form_with url: searches_path, method: :post, local: true, html: { class: 'container' } do |form| %>
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="mb-3">
+        <label for="search_keyword_1" class="form-label">Search Keyword 1:</label>
+        <%= form.text_field :keyword_1, id: "search_keyword_1", class: "form-control" %>
+      </div>
+
+      <div class="mb-3">
+        <label for="search_keyword_2" class="form-label">Search Keyword 2:</label>
+        <%= form.text_field :keyword_2, id: "search_keyword_2", class: "form-control" %>
+      </div>
+
+      <div class="mb-3">
+        <label for="search_keyword_3" class="form-label">Search Keyword 3:</label>
+        <%= form.text_field :keyword_3, id: "search_keyword_3", class: "form-control" %>
+      </div>
+
+      <%= form.submit "Search", class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>
