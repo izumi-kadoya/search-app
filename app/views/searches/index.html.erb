@@ -24,8 +24,10 @@
   </div>
 <% end %>
 
-<% if @response && @response["choices"] && @response["choices"].first %>
-  <p><%= @response["choices"].first["text"] %></p>
-<% else %>
-  <p>No results found.</p>
-<% end %>
+<div class="answer text-center my-4">
+  <% if @response && @response["choices"] && @response["choices"].first %>
+    <p><%= @response["choices"].first["message"]["content"] %></p>
+  <% else %>
+    <p>No results found.</p>
+  <% end %>
+</div>

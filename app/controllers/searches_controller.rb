@@ -8,7 +8,7 @@ class SearchesController < ApplicationController
 
   def create
     keywords = [params[:keyword_1], params[:keyword_2], params[:keyword_3]].join(" ")
-
+  
     response = HTTParty.post(
       "https://api.openai.com/v1/chat/completions",
       headers: {
@@ -16,13 +16,23 @@ class SearchesController < ApplicationController
         "Content-Type" => "application/json"
       },
       body: {
-        prompt: keywords,
-        max_tokens: 100,
-        model: "gpt-4 turbo"
+        messages: [
+          {
+            role: 'system',
+            content: 'You are a helpful assistant.'
+          },
+          {
+            role: 'user',
+            content: keywords
+          }
+        ],
+        max_tokens: 50,
+        model: "gpt-4-1106-preview"
       }.to_json
     )
     Rails.logger.info "API Response: #{response.parsed_response}"
     session[:response] = response.parsed_response
     redirect_to action: :index
   end
+  
 end
