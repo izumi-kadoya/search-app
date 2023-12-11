@@ -4,41 +4,19 @@
 
 <script async src="https://cse.google.com/cse.js?cx=a15bfb6d263eb4a1c">
 </script>
-<div class="gcse-search"></div>
-
-<% if @results.present? %>
-  <div class="search-results">
+<form onsubmit="event.preventDefault(); renderSearchResults(document.getElementById('search-query').value);">
+  <input type="text" id="search-query" name="search-query">
+  <input type="submit" value="Search">
+</form>
+<%# <div class="gcse-search"></div> %>
+<div class="search-list">
+  <% if @response.present? %>
     <ul>
-      <% @results['items'].each do |item| %>
-        <li>
-          <h3><%= link_to item['title'], item['link'] %></h3>
-          <p><%= item['snippet'] %></p>
-        </li>
+      <% @response.each do |result| %>
+        <li><%= result %></li> 
       <% end %>
     </ul>
-  </div>
-<% end %>
-
-
-<%= form_with url: searches_path, method: :post, local: true, html: { class: 'container' } do |form| %>
-  <div class="row">
-    <div class="col-md-6 offset-md-3">
-      <div class="mb-3">
-        <label for="search_keyword_1" class="form-label">Search Keyword 1:</label>
-        <%= form.text_field :keyword_1, id: "search_keyword_1", class: "form-control" %>
-      </div>
-
-      <div class="mb-3">
-        <label for="search_keyword_2" class="form-label">Search Keyword 2:</label>
-        <%= form.text_field :keyword_2, id: "search_keyword_2", class: "form-control" %>
-      </div>
-
-      <div class="mb-3">
-        <label for="search_keyword_3" class="form-label">Search Keyword 3:</label>
-        <%= form.text_field :keyword_3, id: "search_keyword_3", class: "form-control" %>
-      </div>
-
-      <%= form.submit "Search", class: "btn btn-primary" %>
-    </div>
-  </div>
-<% end %>
+  <% else %>
+    <p>検索結果はありません。</p>
+  <% end %>
+</div>
