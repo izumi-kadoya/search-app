@@ -12,9 +12,9 @@
 <div class="search-list">
   <% if @response.present? %>
     <ul>
-      <% @response.each do |result| %>
-        <li><%= result %></li> 
-      <% end %>
+     <% @results.each do |result| %>
+    <li><%= result %></li> 
+  <% end %>
     </ul>
   <% else %>
     <p>No result found.</p>
