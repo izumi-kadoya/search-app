@@ -14,7 +14,7 @@
 <%#  検索結果を読み込むジャバスクリプト %>
  <script>
   function renderSearchResults(searchQuery) {
-    var cx = 'a15bfb6d263eb4a1c'; // Google CSEのID
+    var cx = 'a15bfb6d263eb4a1c';
     var gcse = document.createElement('script');
     gcse.type = 'text/javascript';
     gcse.async = true;
@@ -23,6 +23,8 @@
     s.parentNode.insertBefore(gcse, s);
 
     gcse.onload = function() {
+        console.log(google.search.cse.element)
+        // ログ表示は後ほど削除
       google.search.cse.element.init({
         div: 'search-list',
         tag: 'searchresults-only',
@@ -35,6 +37,7 @@
       searchControl.execute(searchQuery);
     };
   }
+
 </script>
 
  
